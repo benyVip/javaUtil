@@ -1,0 +1,66 @@
+apply from: "./libraries.gradle"
+
+group 'com.beny'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+
+}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            //  mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.SR4'
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/libs-snapshot' }
+}
+
+
+
+dependencies {
+    compile (libraries.elastic)
+    compile (libraries.elasticCode)
+    compile (libraries.lombok)
+    compile (libraries.spring_context_support)
+    compile (libraries.springBoot)
+    compile (libraries.fastjson)
+    compile (libraries.springBootTest)
+}
+
+task"create-dirs" << {
+
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+
+}
