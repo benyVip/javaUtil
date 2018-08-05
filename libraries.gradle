@@ -1,0 +1,30 @@
+/*
+ * Use a libraries map to define the dependency artifacts
+ * It similar to the maven <dependencyManagement>
+ */
+ext {
+	
+	springFrameworkVersion 					= '4.0.5.RELEASE'
+	slf4jVersion							= '1.7.21'
+	logbackVersion							= '1.1.7'
+	lombokVersion							= '1.14.0'
+	elasticVersion                          = '5.5.3'
+	fastJsonVersion                         = '1.2.46'
+	springBootVersion                       = '2.0.3.RELEASE'
+
+
+
+
+	libraries = [
+			//spring base
+            spring_context_support:    	"org.springframework:spring-context-support:${springFrameworkVersion}",
+            logback_classic:			"ch.qos.logback:logback-classic:${logbackVersion}",
+			lombok:						"org.projectlombok:lombok:${lombokVersion}",
+		    elastic:   	            "org.elasticsearch.client:transport:${elasticVersion}",
+			elasticCode:             "org.elasticsearch:elasticsearch:${elasticVersion}",
+			springBoot:             "org.springframework.boot:spring-boot-starter-web:${springBootVersion}",
+			fastjson:               "com.alibaba:fastjson:${fastJsonVersion}",
+			springBootTest:         "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+ 	]
+
+}
